@@ -1,6 +1,7 @@
 # %%
 from read_cfg import read_cfg
 import logging
+import xml.etree.ElementTree as ET
 from lxml import etree
 import pandas as pd
 from unidecode import unidecode
@@ -33,16 +34,28 @@ def read_query(query_file: str) -> pd.DataFrame:
     with open(f"data/{QUERY_SCHEMA}") as f:
         dtd = etree.DTD(f)
 
-    if dtd.validate(xml):
-        df = pd.read_xml(etree.tostring(xml))
-
-    else:
+    # Validate schema
+    if not dtd.validate(xml):
         logging.error(f"Arquivo {query_file} lido falhou na checagem de schema")
         raise ValidationException
 
+    root = xml.getroot()
+
+    data = []
+    for query in root.findall('QUERY'):
+        query_number = query.find('QueryNumber').text.strip()
+        query_text = query.find('QueryText').text.strip()
+        results = query.find('Results').text.strip()
+        for record in query.find('Records'):
+            item = record.text.strip()
+            item_score = record.attrib['score']
+            data.append([query_number, query_text, results, item, item_score])
+
+    df = pd.DataFrame(data, columns=['QueryNumber', 'QueryText', 'Results', 'Item', 'ItemScore'])
     logging.info(f"Arquivo {query_file} lido com sucesso")
 
     return df
+
 
 # %%
 def transform_queries(df_raw: pd.DataFrame) -> pd.DataFrame:
@@ -52,13 +65,15 @@ def transform_queries(df_raw: pd.DataFrame) -> pd.DataFrame:
     df.QueryText = df.QueryText.str.replace(";", "")
     df.QueryText = df.QueryText.str.upper()
     df.QueryText = df.QueryText.apply(lambda s: unidecode(s))
+    df = df[df.duplicated().__invert__()]
 
     logging.info("Tranformação de consultas finalizado com sucesso")
     return df
 
 def transform_expected_results(df_raw: pd.DataFrame) -> pd.DataFrame:
     logging.info("Iniciando tranformação de resultados esperados")
-    df = df_raw[["QueryNumber", "DocNumber", "DocVotes"]]
+    df = df_raw[["QueryNumber", "Item", "ItemScore"]]
+    df.columns = ["QueryNumber","DocNumber", "DocVotes"]
 
     logging.info("Tranformação de resultados esperados finalizado com sucesso")
     return df
@@ -72,16 +87,16 @@ queries_file = cfg["CONSULTAS"].pop()
 expected_results_file = cfg["ESPERADOS"].pop()
 
 # %%
-transform_queries(df).to_csv(
+queries = transform_queries(df)
+queries.to_csv(
     queries_file,
     sep=";",
     index=False
 )
 
-transform_expected_results(df).to_csv(
+expected_results = transform_expected_results(df)
+expected_results.to_csv(
     expected_results_file,
     sep=";",
     index=False
 )
-
-# %%
