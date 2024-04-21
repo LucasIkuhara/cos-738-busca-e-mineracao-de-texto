@@ -1,5 +1,5 @@
 # %%
-from read_cfg import read_cfg
+from utils import ValidationException, read_cfg, setup_logging
 import logging
 import xml.etree.ElementTree as ET
 from lxml import etree
@@ -7,12 +7,7 @@ import pandas as pd
 from unidecode import unidecode
 
 
-FORMAT = '%(asctime)s %(levelname)s: %(message)s'
-logging.basicConfig(filename=f'{__file__}.log', level=logging.INFO, format=FORMAT)
-logging.getLogger().addHandler(logging.StreamHandler())
-logging.info("Iniciando módulo de Processamento de Consulta")
-
-
+setup_logging("Processamento de Consulta")
 cfg = read_cfg("PC.CFG")
 logging.debug("Arquivo de configuração lido com sucesso")
 
@@ -23,8 +18,6 @@ def read_query(query_file: str) -> pd.DataFrame:
     logging.info(f"Iniciando leitura do arquivo {query_file}")
 
     QUERY_SCHEMA = "cfcquery-2.dtd"
-    class ValidationException(Exception):
-        pass
 
     # Read query
     with open(f"data/{query_file}") as f:
@@ -53,6 +46,7 @@ def read_query(query_file: str) -> pd.DataFrame:
 
     df = pd.DataFrame(data, columns=['QueryNumber', 'QueryText', 'Results', 'Item', 'ItemScore'])
     logging.info(f"Arquivo {query_file} lido com sucesso")
+    logging.info(f"O dataframe do arquivo gerado tem {len(df)} linhas")
 
     return df
 
