@@ -7,11 +7,15 @@ readme = "README.md"
 packages = [{include = "cos_738_busca_e_mineracao_de_texto"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 pandas = "^2.2.2"
 scikit-learn = "^1.4.2"
 mlflow = "^2.12.1"
+lxml = "^5.2.1"
 
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.4"
 
 [build-system]
 requires = ["poetry-core"]
