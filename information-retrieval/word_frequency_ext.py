@@ -50,31 +50,43 @@ def read_docs(doc_files: list[str]) -> pd.DataFrame:
         read += 1
         logging.info(f"Arquivo {doc_file} lido com sucesso")
 
-    df = pd.DataFrame(df_data, columns=['RECORDNUM', 'ABSTRACT'])
+    df = pd.DataFrame(df_data, columns=['ID', 'TEXT'])
     logging.info(f"Lidos {read} arquivos com sucesso. O dataframe gerado tem {len(df)} linhas")
 
     return df
 
 # %%
 
-def transform_expected_results(df_raw: pd.DataFrame) -> pd.DataFrame:
-    logging.info("Iniciando tranformação de resultados esperados")
-    df = df_raw[["QueryNumber", "Item", "ItemScore"]]
-    df.columns = ["QueryNumber","DocNumber", "DocVotes"]
+def transform_word_freq(df_raw: pd.DataFrame) -> pd.DataFrame:
+    logging.info("Iniciando tranformação de lista inversa")
+    
+    data = {}
+    for doc, id in zip(df_raw.iloc, range(len(df_raw))):
 
-    logging.info("Tranformação de resultados esperados finalizado com sucesso")
+        txt = doc["TEXT"]
+        txt = unidecode(txt.upper())
+        for word in txt.split(" "):
+
+            if not data.get(word):
+                data[word] = [0 for _ in range(len(df_raw))]
+
+            data[word][id] += 1
+
+    data = [(word, data[word]) for word in data]
+    df = pd.DataFrame(data, columns=("WORD", "FREQUENCY"))
+    print(df.head())
+
+    logging.info("Transformação de lista inversa finalizado com sucesso")
     return df
 
-# %%
 df = read_docs(cfg["LEIA"])
-
-# Get file name
-expected_results_file = cfg["ESPERADOS"].pop()
+reverse_list = transform_word_freq(df)
 
 # %%
-queries = transform_queries(df)
-queries.to_csv(
-    queries_file,
+# Get file name
+reverse_list_file = cfg["ESCREVE"].pop()
+reverse_list.to_csv(
+    reverse_list_file,
     sep=";",
     index=False
 )
