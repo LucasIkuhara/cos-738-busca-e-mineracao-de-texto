@@ -22,7 +22,7 @@ def read_cfg(filename: str) -> dict[str, list[str]]:
 
 def setup_logging(module_name: str):
     FORMAT = '%(asctime)s %(levelname)s: %(message)s'
-    logging.basicConfig(filename=f'{module_name}.log', level=logging.DEBUG, format=FORMAT)
+    logging.basicConfig(filename=f'resultados/{module_name}.log', level=logging.DEBUG, format=FORMAT)
     logging.getLogger().addHandler(logging.StreamHandler())
     logging.info(f"Iniciando módulo: {module_name}")
 
