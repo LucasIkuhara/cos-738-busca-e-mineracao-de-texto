@@ -1,5 +1,9 @@
 import logging
+from unidecode import unidecode
+import nltk
 
+
+nltk.download('punkt')
 
 def read_cfg(filename: str) -> dict[str, list[str]]:
     with open(filename, "r") as f:
@@ -26,6 +30,13 @@ def setup_logging(module_name: str):
     logging.getLogger().addHandler(logging.StreamHandler())
     logging.info(f"Iniciando módulo: {module_name}")
 
+
+def tokenize_sequence(txt: str) -> list[str]:
+    txt = unidecode(txt.upper())
+    txt = txt. replace(";", "")
+    sentence = nltk.tokenize.word_tokenize(txt)
+
+    return sentence
 
 class ValidationException(Exception):
     """Falha na validação de schema do arquivo XML. O formato difere do DTD."""

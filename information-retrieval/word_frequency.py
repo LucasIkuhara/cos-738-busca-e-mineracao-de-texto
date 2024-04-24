@@ -1,13 +1,10 @@
 # %%
-import nltk
-from utils import read_cfg, setup_logging
+from utils import read_cfg, setup_logging, tokenize_sequence
 import logging
 from lxml import etree
 import pandas as pd
-from unidecode import unidecode
 
 
-nltk.download('punkt')
 setup_logging("Gerador de Lista Invertida")
 cfg = read_cfg("GLI.CFG")
 logging.debug("Arquivo de configuração lido com sucesso")
@@ -65,9 +62,7 @@ def transform_word_freq(df_raw: pd.DataFrame) -> pd.DataFrame:
     for doc, id in zip(df_raw.iloc, range(len(df_raw))):
 
         txt = doc["TEXT"]
-        txt = unidecode(txt.upper())
-        txt = txt. replace(";", "")
-        sentence = nltk.tokenize.word_tokenize(txt)
+        sentence = tokenize_sequence(txt)
         for word in sentence:
 
             if not data.get(word):

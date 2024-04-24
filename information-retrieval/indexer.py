@@ -41,23 +41,31 @@ logging.info(f"Removidas palavras com números. Restam {len(index)} palavras.")
 # TF/IDF
 logging.info(f"Aplicando TF/IDF")
 term_freq_acc = index.FREQUENCY.sum()
-doc_amount = len(index.FREQUENCY.iloc[0])
+total_doc_amount = len(index.FREQUENCY.iloc[0])
 
 # Frequency of term T in document D / Total terms in document D
+# Aka. Relative frequency of a term in respect to its own document
 index["TF"] = index.FREQUENCY.apply(lambda word_freq: word_freq / term_freq_acc)
 
 # One-hot-encoded flag, meaning whether the document contains the word
 index["ONE_HOT_WORD_IN_DOC"] = index.FREQUENCY.apply(lambda ls: ls.astype(bool).astype(int))
+
+# Count in how many documents each word appears in
 index["DOC_APPEARANCES"] = index.ONE_HOT_WORD_IN_DOC.apply(lambda ls: ls.sum())
 
 # Log of (Total number of docs / Documents with term t)
-index["IDF"] = index["DOC_APPEARANCES"].apply(lambda n: np.log10(doc_amount / n))
+# Aka measures how relevant the term is, based on how unique it is
+index["IDF"] = index["DOC_APPEARANCES"].apply(lambda n: np.log10(total_doc_amount / n))
+
+index["TFIDF"] = index.TF * index.IDF
 logging.info(f"TF/IDF aplicado com sucesso")
 
 # %%
-# Write model
-index.to_csv(
+# Save model
+model = index[["WORD", "TFIDF"]]
+model.to_csv(
     model_file,
     index=False
 )
+
 logging.info(f"Modelo salvo no arquivo {model_file} com sucesso")
