@@ -82,7 +82,7 @@ for query in queries.iloc:
 
     for vec, pos in zip(res.iloc, range(1, len(res) + 1)):
         data.append([query.QueryNumber, [pos, int(vec.doc_index), vec.score]])
-    break
+
 results = pd.DataFrame(data, columns=["QueryNumber", "Result"])
 
 # %%
