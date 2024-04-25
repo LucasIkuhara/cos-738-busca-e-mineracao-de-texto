@@ -15,3 +15,12 @@ pip3 install -r requirements.txt
 ```
 
 ## Execução
+
+Para executar todos os módulos, execute o script run_all:
+```sh
+./run_all.sh
+```
+
+## Observações
+
+A métrica de distância usada foi a similaridade de cosseno. Portanto, maior é mais similar.
