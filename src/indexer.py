@@ -3,9 +3,11 @@ import pandas as pd
 from utils import read_cfg, setup_logging
 import numpy as np
 import logging
+from time import time
 
 
 setup_logging("Indexador")
+start = time()
 cfg = read_cfg("INDEX.CFG")
 reverse_freq_file = cfg["LEIA"].pop()
 model_file = cfg["ESCREVA"].pop()
@@ -70,5 +72,4 @@ with open(model_file, "wb") as fd:
     dump(model, fd)
 
 logging.info(f"Modelo salvo no arquivo {model_file} com sucesso")
-
-# %%
+logging.info(f"Execução do modulo finalizada em {time() - start}s")

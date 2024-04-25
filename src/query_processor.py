@@ -5,8 +5,10 @@ import xml.etree.ElementTree as ET
 from lxml import etree
 import pandas as pd
 from unidecode import unidecode
+from time import time
 
 
+start = time()
 setup_logging("Processamento de Consulta")
 cfg = read_cfg("PC.CFG")
 logging.debug("Arquivo de configuração lido com sucesso")
@@ -97,3 +99,5 @@ expected_results.to_csv(
     sep=";",
     index=False
 )
+logging.info(f"Arquivos {queries_file} e {expected_results_file} criados.")
+logging.info(f"Execução do modulo finalizada em {time() - start}s")

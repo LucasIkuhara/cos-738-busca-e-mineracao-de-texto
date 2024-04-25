@@ -1,0 +1,22 @@
+2024-04-24 23:12:57,775 INFO: Iniciando módulo: Indexador
+2024-04-24 23:12:57,776 DEBUG: Arquivo de configuração lido com sucesso
+2024-04-24 23:12:57,776 INFO: Iniciando leitura de lista invertida
+2024-04-24 23:12:58,790 INFO: Finalizada a leitura de lista invertida
+2024-04-24 23:12:58,790 INFO: Filtrando palavras do índice. Iniciando com 11503
+2024-04-24 23:12:58,793 INFO: Removidas palavras com menos de 2 letras. Restam 11454 palavras.
+2024-04-24 23:12:58,795 INFO: Removidas palavras com números. Restam 9071 palavras.
+2024-04-24 23:12:58,795 INFO: Aplicando TF/IDF
+2024-04-24 23:12:58,944 INFO: TF/IDF aplicado com sucesso
+2024-04-24 23:12:59,089 INFO: Modelo salvo no arquivo resultados/model.csv com sucesso
+2024-04-24 23:12:59,090 INFO: Execução do modulo finalizada em 1.3140435218811035s
+2024-04-24 23:13:27,986 INFO: Iniciando módulo: Indexador
+2024-04-24 23:13:27,987 DEBUG: Arquivo de configuração lido com sucesso
+2024-04-24 23:13:27,987 INFO: Iniciando leitura de lista invertida
+2024-04-24 23:13:29,002 INFO: Finalizada a leitura de lista invertida
+2024-04-24 23:13:29,002 INFO: Filtrando palavras do índice. Iniciando com 11503
+2024-04-24 23:13:29,005 INFO: Removidas palavras com menos de 2 letras. Restam 11454 palavras.
+2024-04-24 23:13:29,006 INFO: Removidas palavras com números. Restam 9071 palavras.
+2024-04-24 23:13:29,006 INFO: Aplicando TF/IDF
+2024-04-24 23:13:29,156 INFO: TF/IDF aplicado com sucesso
+2024-04-24 23:13:29,307 INFO: Modelo salvo no arquivo resultados/model.csv com sucesso
+2024-04-24 23:13:29,307 INFO: Execução do modulo finalizada em 1.3207299709320068s

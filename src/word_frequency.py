@@ -3,8 +3,10 @@ from utils import read_cfg, setup_logging, tokenize_sequence
 import logging
 from lxml import etree
 import pandas as pd
+from time import time
 
 
+start = time()
 setup_logging("Gerador de Lista Invertida")
 cfg = read_cfg("GLI.CFG")
 logging.debug("Arquivo de configuração lido com sucesso")
@@ -88,3 +90,5 @@ reverse_list.to_csv(
     sep=";",
     index=False
 )
+logging.info(f"Arquivos {reverse_list_file} criado.")
+logging.info(f"Execução do modulo finalizada em {time() - start}s")

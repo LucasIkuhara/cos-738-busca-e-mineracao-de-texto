@@ -1,0 +1,10 @@
+2024-04-24 23:12:59,938 INFO: Iniciando módulo: Busca
+2024-04-24 23:12:59,938 DEBUG: Arquivo de configuração lido com sucesso
+2024-04-24 23:12:59,938 DEBUG: Lendo pesos do modelo
+2024-04-24 23:13:00,014 DEBUG: Pesos do modelo lidos com sucesso
+2024-04-24 23:13:30,173 INFO: Iniciando módulo: Busca
+2024-04-24 23:13:30,173 DEBUG: Arquivo de configuração lido com sucesso
+2024-04-24 23:13:30,173 DEBUG: Lendo pesos do modelo
+2024-04-24 23:13:30,250 DEBUG: Pesos do modelo lidos com sucesso
+2024-04-24 23:13:43,160 INFO: Arquivo resultados/RESULTADOS.csv criado.
+2024-04-24 23:13:43,160 INFO: Execução do modulo finalizada em 12.98664927482605s

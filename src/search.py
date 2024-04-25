@@ -4,7 +4,10 @@ from utils import read_cfg, setup_logging, tokenize_sequence
 import logging
 import numpy as np
 import pandas as pd
+from time import time
 
+
+start = time()
 setup_logging("Busca")
 cfg = read_cfg("BUSCA.CFG")
 model_file = cfg["MODELO"].pop()
@@ -40,7 +43,7 @@ class RetrievalModel:
         in_vec["NEW_VEC"] = np.zeros(len(in_vec), dtype=int)
 
         for word in txt:
-            in_vec.NEW_VEC[in_vec.WORD == word] += 1
+            in_vec.loc[in_vec.WORD == word, "NEW_VEC"] += 1
         
         in_vec.NEW_VEC = in_vec.NEW_VEC.apply(lambda n: n/len(txt))
         in_vec.NEW_VEC = in_vec.NEW_VEC * self.data.IDF
@@ -86,9 +89,11 @@ for query in queries.iloc:
 results = pd.DataFrame(data, columns=["QueryNumber", "Result"])
 
 # %%
-
+# Salvar resultados
 results.to_csv(
     results_file,
     index=False,
     sep=";"
 )
+logging.info(f"Arquivo {results_file} criado.")
+logging.info(f"Execução do modulo finalizada em {time() - start}s")

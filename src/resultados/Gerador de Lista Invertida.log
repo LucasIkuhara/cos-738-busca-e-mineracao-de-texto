@@ -1,0 +1,28 @@
+2024-04-24 23:12:54,812 INFO: Iniciando módulo: Gerador de Lista Invertida
+2024-04-24 23:12:54,812 DEBUG: Arquivo de configuração lido com sucesso
+2024-04-24 23:12:54,812 INFO: Iniciando leitura de 6 arquivos
+2024-04-24 23:12:54,825 INFO: Arquivo cf74.xml lido com sucesso
+2024-04-24 23:12:54,845 INFO: Arquivo cf75.xml lido com sucesso
+2024-04-24 23:12:54,869 INFO: Arquivo cf76.xml lido com sucesso
+2024-04-24 23:12:54,889 INFO: Arquivo cf77.xml lido com sucesso
+2024-04-24 23:12:54,908 INFO: Arquivo cf78.xml lido com sucesso
+2024-04-24 23:12:54,928 INFO: Arquivo cf79.xml lido com sucesso
+2024-04-24 23:12:54,929 INFO: Lidos 6 arquivos com sucesso. O dataframe gerado tem 1215 linhas
+2024-04-24 23:12:54,930 INFO: Iniciando tranformação de lista inversa
+2024-04-24 23:12:55,963 INFO: Transformação de lista inversa finalizado com sucesso
+2024-04-24 23:12:56,844 INFO: Arquivos resultados/word_freq_by_docs.csv criado.
+2024-04-24 23:12:56,844 INFO: Execução do modulo finalizada em 2.032647132873535s
+2024-04-24 23:13:25,117 INFO: Iniciando módulo: Gerador de Lista Invertida
+2024-04-24 23:13:25,117 DEBUG: Arquivo de configuração lido com sucesso
+2024-04-24 23:13:25,117 INFO: Iniciando leitura de 6 arquivos
+2024-04-24 23:13:25,130 INFO: Arquivo cf74.xml lido com sucesso
+2024-04-24 23:13:25,150 INFO: Arquivo cf75.xml lido com sucesso
+2024-04-24 23:13:25,173 INFO: Arquivo cf76.xml lido com sucesso
+2024-04-24 23:13:25,193 INFO: Arquivo cf77.xml lido com sucesso
+2024-04-24 23:13:25,208 INFO: Arquivo cf78.xml lido com sucesso
+2024-04-24 23:13:25,226 INFO: Arquivo cf79.xml lido com sucesso
+2024-04-24 23:13:25,227 INFO: Lidos 6 arquivos com sucesso. O dataframe gerado tem 1215 linhas
+2024-04-24 23:13:25,228 INFO: Iniciando tranformação de lista inversa
+2024-04-24 23:13:26,263 INFO: Transformação de lista inversa finalizado com sucesso
+2024-04-24 23:13:27,053 INFO: Arquivos resultados/word_freq_by_docs.csv criado.
+2024-04-24 23:13:27,053 INFO: Execução do modulo finalizada em 1.9358747005462646s
