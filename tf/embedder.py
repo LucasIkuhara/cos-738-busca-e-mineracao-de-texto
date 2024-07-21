@@ -2,6 +2,8 @@
 # Imports
 import ollama
 import pandas as pd
+import numpy as np
+import pickle
 
 # %%
 # Read data
@@ -25,5 +27,36 @@ def embed(st: str):
 df["embedding"] = df["statement"].apply(embed)
 
 # %%
-# Export results
+# Export results as parquet
 df.to_parquet(OUT_FILE, index=False)
+
+# %%
+# Export as pickles for faster loading
+# Vector series to 2d np array
+x = np.stack(df["embedding"].map(np.array))
+
+# String labels to sparse floats
+def y_to_one_hot(y_df: pd.dfFrame) -> np.array:
+    classes = [
+        "Anxiety",
+        "Bipolar",
+        "Depression",
+        "Normal",
+        "Personality disorder",
+        "Stress",
+        "Suicidal"
+    ]
+
+    for cl in classes:
+        y_df[cl] = y_df["status"] == cl
+        y_df[cl] = y_df[cl].astype(np.float32)
+
+    y_df = y_df.drop(columns=["status"])
+    return y_df.to_numpy()
+
+y_df = df[["status"]]
+y = y_to_one_hot(y_df)
+
+# Dump data as pickle files
+pickle.dump(x, open("/mnt/d/bmt-data/x.pickle", "wb"), protocol=None, fix_imports=True, buffer_callback=None)
+pickle.dump(y, open("/mnt/d/bmt-data/y.pickle", "wb"), protocol=None, fix_imports=True, buffer_callback=None)
