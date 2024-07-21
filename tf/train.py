@@ -5,6 +5,7 @@ from keras.api.models import Sequential
 from scikeras.wrappers import KerasClassifier
 from keras.api.layers import Dense, Input
 from keras.callbacks import EarlyStopping
+from typing import Callable
 import keras
 import pandas as pd
 import pickle
@@ -19,47 +20,41 @@ print("Dataset read successfully.")
 
 # %%
 # Model creation
-def make_model():
-    model = Sequential([
-        # Input(shape=(4096,)),
-        Dense(1024, activation="relu", input_dim=4096),
-        Dense(1024, activation="relu"),
-        Dense(7, activation="softmax")
-    ])
+def make_model_sized(n: int) -> Callable[[], keras.Model]:
 
-    model.compile("adam", loss="categorical_crossentropy", metrics=["accuracy"])
-    model.summary()
+    def make_model() -> keras.Model:
+        model = Sequential([
+            Input(shape=(4096,)),
+            Dense(n, activation="relu"),
+            Dense(n, activation="relu"),
+            Dense(7, activation="softmax")
+        ])
 
-    return model
+        model.compile("adam", loss="categorical_crossentropy", metrics=["accuracy"])
+
+        return model
+    
+    make_model.__name__ = f"make_model_{n}"
+    return make_model
 
 # %%
-# Train model
+# Train and evaluate model with cross validation
 MAX_EPOCHS=100
+BATCH_SIZE = 200
+
 early_stop = EarlyStopping(monitor='loss', patience=3)
 
-# x_train, x_test, y_train, y_test = train_test_split(
-#     x, y, test_size=0.2, random_state=0
-# )
-x_train = x[:42144]
-x_test = x[42144:]
+for size in [1024, 2048, 4096]:
+    factory = make_model_sized(size)
+    factory().summary()
+    estimator = KerasClassifier(
+        build_fn=factory, 
+        epochs=MAX_EPOCHS, 
+        batch_size=BATCH_SIZE, 
+        callbacks=[early_stop]
+    )
+    sc = cross_val_score(estimator, x, y, cv=5)
 
-y_train = y[:42144]
-y_test = y[42144:]
-
-model = make_model()
-model.fit(x_train, y_train, batch_size=200, epochs=MAX_EPOCHS, callbacks=[early_stop])
-
-# %%
-
-model.save("/mnt/d/bmt-data/model.keras")
-
-# %%
-# Evaluate metrics
-if not model:
-    model = keras.models.load_model("/mnt/d/bmt-data/model.keras")
-
-estimator = KerasClassifier(model=model, epochs=MAX_EPOCHS, batch_size=200, callbacks=[early_stop])
-score = estimator.score(x_test, y_test)
-print("Score: ", score)
+    print(f"[{size}-model] Accuracy Score: Mean={sc}")
 
 # %%
