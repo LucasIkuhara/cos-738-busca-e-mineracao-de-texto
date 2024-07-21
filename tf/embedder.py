@@ -5,8 +5,8 @@ import pandas as pd
 
 # %%
 # Read data
-FILE = "train_raw.csv"
-OUT_FILE = f"emb_{FILE.split("_")[0]}.csv"
+FILE = "test_raw.csv"
+OUT_FILE = f"emb_{FILE.split("_")[0]}.parquet"
 
 df = pd.read_csv(FILE)
 
@@ -25,6 +25,5 @@ def embed(st: str):
 df["embedding"] = df["statement"].apply(embed)
 
 # %%
-df.to_csv(OUT_FILE, index=False)
-
-# %%
+# Export results
+df.to_parquet(OUT_FILE, index=False)
