@@ -6,7 +6,9 @@ from lxml import etree
 import pandas as pd
 from unidecode import unidecode
 from time import time
+from nltk.stem import *
 
+STEMMER = True
 
 start = time()
 setup_logging("Processamento de Consulta")
@@ -61,6 +63,11 @@ def transform_queries(df_raw: pd.DataFrame) -> pd.DataFrame:
     df.QueryText = df.QueryText.str.replace(";", "")
     df.QueryText = df.QueryText.str.upper()
     df.QueryText = df.QueryText.apply(lambda s: unidecode(s))
+
+    if STEMMER:
+        stemmer = PorterStemmer()
+        df.QueryText = df.QueryText.apply(lambda s: stemmer.stem(s))
+
     df = df[df.duplicated().__invert__()]
 
     logging.info("Tranformação de consultas finalizado com sucesso")

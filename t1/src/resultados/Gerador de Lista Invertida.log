@@ -26,3 +26,17 @@
 2024-04-24 23:13:26,263 INFO: Transformação de lista inversa finalizado com sucesso
 2024-04-24 23:13:27,053 INFO: Arquivos resultados/word_freq_by_docs.csv criado.
 2024-04-24 23:13:27,053 INFO: Execução do modulo finalizada em 1.9358747005462646s
+2024-07-22 21:48:21,153 INFO: Iniciando módulo: Gerador de Lista Invertida
+2024-07-22 21:48:21,153 DEBUG: Arquivo de configuração lido com sucesso
+2024-07-22 21:48:21,153 INFO: Iniciando leitura de 6 arquivos
+2024-07-22 21:48:21,169 INFO: Arquivo cf74.xml lido com sucesso
+2024-07-22 21:48:21,191 INFO: Arquivo cf75.xml lido com sucesso
+2024-07-22 21:48:21,220 INFO: Arquivo cf76.xml lido com sucesso
+2024-07-22 21:48:21,243 INFO: Arquivo cf77.xml lido com sucesso
+2024-07-22 21:48:21,262 INFO: Arquivo cf78.xml lido com sucesso
+2024-07-22 21:48:21,283 INFO: Arquivo cf79.xml lido com sucesso
+2024-07-22 21:48:21,284 INFO: Lidos 6 arquivos com sucesso. O dataframe gerado tem 1215 linhas
+2024-07-22 21:48:21,286 INFO: Iniciando tranformação de lista inversa
+2024-07-22 21:48:22,347 INFO: Transformação de lista inversa finalizado com sucesso
+2024-07-22 21:48:23,137 INFO: Arquivos resultados/word_freq_by_docs.csv criado.
+2024-07-22 21:48:23,137 INFO: Execução do modulo finalizada em 1.9840590953826904s

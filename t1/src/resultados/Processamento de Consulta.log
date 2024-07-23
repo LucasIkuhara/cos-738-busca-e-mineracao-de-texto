@@ -20,3 +20,14 @@
 2024-04-24 23:13:24,293 INFO: Tranformação de resultados esperados finalizado com sucesso
 2024-04-24 23:13:24,295 INFO: Arquivos resultados/queries.csv e resultados/exp_query_results.csv criados.
 2024-04-24 23:13:24,295 INFO: Execução do modulo finalizada em 0.01772618293762207s
+2024-07-22 21:48:19,839 INFO: Iniciando módulo: Processamento de Consulta
+2024-07-22 21:48:19,839 DEBUG: Arquivo de configuração lido com sucesso
+2024-07-22 21:48:19,839 INFO: Iniciando leitura do arquivo cfquery.xml
+2024-07-22 21:48:19,849 INFO: Arquivo cfquery.xml lido com sucesso
+2024-07-22 21:48:19,849 INFO: O dataframe do arquivo gerado tem 4820 linhas
+2024-07-22 21:48:19,850 INFO: Iniciando tranformação de consultas
+2024-07-22 21:48:19,892 INFO: Tranformação de consultas finalizado com sucesso
+2024-07-22 21:48:19,894 INFO: Iniciando tranformação de resultados esperados
+2024-07-22 21:48:19,896 INFO: Tranformação de resultados esperados finalizado com sucesso
+2024-07-22 21:48:19,898 INFO: Arquivos resultados/queries.csv e resultados/RESULTADOS_ESPERADOS.csv criados.
+2024-07-22 21:48:19,898 INFO: Execução do modulo finalizada em 0.05970168113708496s

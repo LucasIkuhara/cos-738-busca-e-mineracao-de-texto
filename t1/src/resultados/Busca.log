@@ -8,3 +8,9 @@
 2024-04-24 23:13:30,250 DEBUG: Pesos do modelo lidos com sucesso
 2024-04-24 23:13:43,160 INFO: Arquivo resultados/RESULTADOS.csv criado.
 2024-04-24 23:13:43,160 INFO: Execução do modulo finalizada em 12.98664927482605s
+2024-07-22 21:48:27,013 INFO: Iniciando módulo: Busca
+2024-07-22 21:48:27,014 DEBUG: Arquivo de configuração lido com sucesso
+2024-07-22 21:48:27,014 DEBUG: Lendo pesos do modelo
+2024-07-22 21:48:27,126 DEBUG: Pesos do modelo lidos com sucesso
+2024-07-22 21:48:40,954 INFO: Arquivo resultados/RESULTADOS.csv criado.
+2024-07-22 21:48:40,954 INFO: Execução do modulo finalizada em 13.94039535522461s
